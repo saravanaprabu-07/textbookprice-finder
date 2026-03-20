@@ -173,3 +173,16 @@ body {
     from {opacity:0; transform:translateY(20px);}
     to {opacity:1; transform:translateY(0);}
 }
+.delete-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: red;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.delete-btn:hover {
+    background: darkred;
+}
