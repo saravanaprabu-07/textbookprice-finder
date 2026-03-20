@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>📚Student Book Finder</h2>
+    <a href="/logout">Logout</a>
+</div>
+
+<!-- SEARCH -->
+<div class="search-box">
+    <form method="GET" action="/home">
+        <input name="search" placeholder="🔍 Search by title, subject, price">
+        <button>Search</button>
+    </form>
+</div>
+
+
+<div class="form-box">
+    <h3>Add New Book</h3>
+    <form method="POST" action="/add_book">
+        <input name="title" placeholder="Book Title" required>
+        <input name="author" placeholder="Author Name" required>
+        <input name="subject" placeholder="Subject" required>
+        <input name="price" placeholder="Price" required>
+        <input name="holder" placeholder="Available With" required>
+        <button>Add Book</button>
+    </form>
+</div>
+
+
+<h2 class="section-title">📖 Available Books</h2>
+
+<div class="books-container">
+    {% for book in books %}
+    <div class="book-card">
+        <h3>{{ book.title }}</h3>
+        <p><b>Author:</b> {{ book.author }}</p>
+        <p><b>Subject:</b> {{ book.subject }}</p>
+        <p class="price">₹{{ book.price }}</p>
+        <p><b>Holder:</b> {{ book.holder }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="admin-link">
+    <a href="/view_logins">👤 View Logged Users</a>
+</div>
+
+</body>
+</html>
