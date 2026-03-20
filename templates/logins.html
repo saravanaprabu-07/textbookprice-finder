@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Users</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="auth-container">
+    <h2>👥 Logged Users</h2>
+
+    <ul class="user-list">
+        {% for u in logins %}
+        <li>📧 {{ u.email }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/home" class="back-btn">⬅ Back</a>
+</div>
+
+</body>
+</html>
