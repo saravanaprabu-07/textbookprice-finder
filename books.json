@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "title": "Engineering Mathematics",
+        "author": "B.S. Grewal",
+        "subject": "Math",
+        "price": 499,
+        "holder": "Rahul (CSE)",
+        "link": "#"
+    },
+    {
+        "id": 2,
+        "title": "Data Structures",
+        "author": "Seymour",
+        "subject": "DSA",
+        "price": 550,
+        "holder": "Anita (IT)",
+        "link": "#"
+    },
+    {
+        "id": 3,
+        "title": "Operating Systems",
+        "author": "Galvin",
+        "subject": "OS",
+        "price": 720,
+        "holder": "Karthik (ECE)",
+        "link": "#"
+    },
+    {
+        "id": 4,
+        "title": "Computer Networks",
+        "author": "Tanenbaum",
+        "subject": "Networking",
+        "price": 650,
+        "holder": "Priya (CSE)",
+        "link": "#"
+    },
+    {
+        "id": 5,
+        "title": "DBMS",
+        "author": "Korth",
+        "subject": "Database",
+        "price": 600,
+        "holder": "Vimal (IT)",
+        "link": "#"
+    },
+    {
+        "id": 7,
+        "title": "the great",
+        "author": "saro",
+        "subject": "fiction",
+        "price": 1000,
+        "holder": "saravana",
+        "link": "#"
+    }
+]
