@@ -7,7 +7,7 @@
 <body>
 
 <div class="navbar">
-    <h2>📚Student Book Finder</h2>
+    <h2>📚 Student Book Finder</h2>
     <a href="/logout">Logout</a>
 </div>
 
@@ -19,7 +19,7 @@
     </form>
 </div>
 
-
+<!-- ADD BOOK -->
 <div class="form-box">
     <h3>Add New Book</h3>
     <form method="POST" action="/add_book">
@@ -32,7 +32,7 @@
     </form>
 </div>
 
-
+<!-- BOOK LIST -->
 <h2 class="section-title">📖 Available Books</h2>
 
 <div class="books-container">
@@ -43,13 +43,26 @@
         <p><b>Subject:</b> {{ book.subject }}</p>
         <p class="price">₹{{ book.price }}</p>
         <p><b>Holder:</b> {{ book.holder }}</p>
+
+        <!-- DELETE BUTTON (ADMIN ONLY) -->
+        {% if session.role == "admin" %}
+        <a href="/delete_book/{{ book.id }}" 
+           class="delete-btn"
+           onclick="confirmDelete(event)">
+           🗑 Delete
+        </a>
+        {% endif %}
     </div>
     {% endfor %}
 </div>
 
+<!-- ADMIN LINK -->
 <div class="admin-link">
     <a href="/view_logins">👤 View Logged Users</a>
 </div>
+
+<!-- SCRIPT -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
