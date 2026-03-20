@@ -11,7 +11,7 @@ USER_FILE = os.path.join(BASE_DIR, "users.json")
 BOOK_FILE = os.path.join(BASE_DIR, "books.json")
 LOGIN_FILE = os.path.join(BASE_DIR, "logins.json")
 
-# ---------- FILE HANDLING ----------
+# ---------- FILE ----------
 def load_file(file):
     if not os.path.exists(file):
         with open(file, "w") as f:
@@ -87,7 +87,6 @@ def login():
                 logins.append({"email": email})
                 save_file(LOGIN_FILE, logins)
 
-                # 🔥 send email alert to admin
                 notify_admin(email)
 
                 return redirect("/home")
@@ -96,7 +95,7 @@ def login():
 
     return render_template("login.html")
 
-# ---------- HOME (BOOK DISPLAY + SEARCH) ----------
+# ---------- HOME ----------
 @app.route("/home")
 def home():
     if "user" not in session:
@@ -115,6 +114,46 @@ def home():
 
     return render_template("index.html", books=books)
 
+# ---------- ADD BOOK ----------
+@app.route("/add_book", methods=["POST"])
+def add_book():
+    if session.get("role") != "admin":
+        return "Access Denied"
+
+    books = load_file(BOOK_FILE)
+
+    new = {
+        "id": len(books) + 1,
+        "title": request.form["title"],
+        "author": request.form["author"],
+        "subject": request.form["subject"],
+        "price": int(request.form["price"]),
+        "holder": request.form["holder"]
+    }
+
+    books.append(new)
+    save_file(BOOK_FILE, books)
+
+    return redirect("/home")
+
+# ---------- DELETE BOOK ----------
+@app.route("/delete_book/<int:book_id>")
+def delete_book(book_id):
+    if session.get("role") != "admin":
+        return "Access Denied"
+
+    books = load_file(BOOK_FILE)
+
+    books = [b for b in books if b["id"] != book_id]
+
+    # reset IDs
+    for i, b in enumerate(books):
+        b["id"] = i + 1
+
+    save_file(BOOK_FILE, books)
+
+    return redirect("/home")
+
 # ---------- VIEW LOGINS ----------
 @app.route("/view_logins")
 def view_logins():
@@ -124,35 +163,13 @@ def view_logins():
     logins = load_file(LOGIN_FILE)
     return render_template("logins.html", logins=logins)
 
-# ---------- ADD BOOK ----------
-@app.route("/add_book", methods=["POST"])
-def add_book():
-    if session.get("role") != "admin":
-        return "Access Denied"
-
-    books = load_file(BOOK_FILE)
-
-    new_book = {
-        "id": len(books) + 1,
-        "title": request.form["title"],
-        "author": request.form["author"],
-        "subject": request.form["subject"],
-        "price": int(request.form["price"]),
-        "holder": request.form["holder"]
-    }
-
-    books.append(new_book)
-    save_file(BOOK_FILE, books)
-
-    return redirect("/home")
-
 # ---------- LOGOUT ----------
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect("/")
 
-# ---------- RUN (RENDER COMPATIBLE) ----------
+# ---------- RUN ----------
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
