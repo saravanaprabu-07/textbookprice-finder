@@ -1,4 +1,4 @@
-# 📚 Textbook Price Finder
+# 📚 campus-used-books
 
 A simple and user-friendly web application that helps students find, manage, and share textbooks. Users can search for books, view prices, and check who currently owns a book. The project includes user authentication and an admin dashboard for managing books.
 
